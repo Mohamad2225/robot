@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Send Request and Receive HTML Code</title>
+	<title>Send Request and </title>
 </head>
 <body>
 	<script>
@@ -13,7 +13,9 @@
         var images;
         var videos;
         var files;
-		fetch(link)
+
+		// Using CORS Anywhere to bypass the CORS restriction
+		fetch('https://cors-anywhere.herokuapp.com/' + link)
             .then(res => res.text())
             .then(response => {
                 var parser = new DOMParser();
