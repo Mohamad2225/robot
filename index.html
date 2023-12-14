@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Send www</title>
+	<title>Send Request and Receive HTML Code</title>
 </head>
 <body>
 	<script>
@@ -13,11 +13,10 @@
         var images;
         var videos;
         var files;
-		var xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				var response = this.responseText;
-				var parser = new DOMParser();
+		fetch(link)
+            .then(res => res.text())
+            .then(response => {
+                var parser = new DOMParser();
 				var htmlDoc = parser.parseFromString(response, 'text/html');
 				messages = Array.from(htmlDoc.querySelectorAll('.etme_widget_message_text.js-message_text.before_footer')).map(function(message) {
 					var msg = message.textContent.trim();
@@ -33,12 +32,8 @@
                 images = information[1];
                 videos = information[2];
                 files = information[3];
-			}
-		};
-		xhttp.open("GET", link, true);
-		xhttp.setRequestHeader("Origin", "https://eitaa.com/crcrc2");
-                xhttp.setRequestHeader("ccess-Control-Allow-Origin", "true");
-		xhttp.send();
+            })
+            .catch(error => console.log(error));
 	</script>
 </body>
 </html>
